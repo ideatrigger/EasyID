@@ -14,7 +14,8 @@
 	<modules>
 		<module>easyid-core</module>
 		<module>easyid-ws</module>
-		<module>easyid-oauth</module>		
+		<module>easyid-oauth</module>
+		<module>easyid-res</module>						
 	</modules>
 	
 	<parent>
