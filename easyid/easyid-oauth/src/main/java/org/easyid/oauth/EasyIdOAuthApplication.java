@@ -10,15 +10,20 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @EnableResourceServer annotation from Spring OAuth, which by default secures everything
+ * in an authorization server except the “/oauth/*” endpoints
+ * 
+ *  
+ * @author hongyan.song
+ * 
+ * Reference:
+ * https://spring.io/blog/2015/02/03/sso-with-oauth2-angular-js-and-spring-security-part-v
+ * 
+ */
 @SpringBootApplication
 @RestController
 @EnableResourceServer
-
-//
-//@EnableResourceServer annotation from Spring OAuth, which by default secures everything 
-//in an authorization server except the “/oauth/*” endpoints
-//
-
 public class EasyIdOAuthApplication {
 
 	private static final Log logger = LogFactory.getLog(EasyIdOAuthApplication.class);
