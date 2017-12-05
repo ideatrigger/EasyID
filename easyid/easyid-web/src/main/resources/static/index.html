@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>OAuth2 Client Demo</title>
+</head>
+<body>
+	<h1>Unsecured Page</h1>
+	<button onclick="loadMessage()">Load Message</button>
+	<div>Message is: <span id="message"></span></div>
+	
+	<div>
+		<button onclick="submitNewMessage()">
+			Submit Message
+		</button>
+	</div>
+	<input type="text" id="messageToSubmit" />
+	
+	<script>
+		function loadMessage() {
+			fetch('/api/message')
+				.then( r => r.json())
+				.then(json => document.getElementById("message").textContent = json.message);				
+		}
+		
+		function submitNewMessage() {
+			fetch('/api/message', {
+				method: 'POST'
+				, body: JSON.stringify(document.getElementById("messageToSubmit").value)
+				, credentials: 'same-origin'
+				, headers: new Headers({'X-Requested-With':'XMLHttpRequest', 'Content-Type':'application/json'})
+			});				
+		}
+	</script>
+</body>
+</html>

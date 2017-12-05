@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.Collections;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,12 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableResourceServer
-public class EasyidResApplication {
-
+public class EasyIdResApplication {
+	private static final Log logger = LogFactory.getLog(EasyIdResApplication.class);
 	private String message = "Hello world!";
 	
 	public static void main(String[] args) {
-		SpringApplication.run(EasyidResApplication.class, args);
+		SpringApplication.run(EasyIdResApplication.class, args);
 	}
 	
 
@@ -36,10 +38,11 @@ public class EasyidResApplication {
 	@PreAuthorize("hasRole('ROLE_RS_WRITE')")
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public void updateMessage(@RequestBody String message) {
+		logger.info("Get message: [" + message + "]");
 		this.message = message;
 	}
 
-	@PreAuthorize("#oauth2.hasScope('resource-server-read)")
+	@PreAuthorize("#oauth2.hasScope('resource-server-read')")
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public Map<String, String> user(Principal user) {
 		return Collections.singletonMap("message", "user is: "+user.toString());
